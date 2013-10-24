@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <!-- Repositories classes -->
+        <parameter key="repository.oauth_remote_server.class">LX\OAuthBundle\Repository\OAuthRemoteServerRepository</parameter>
+        <parameter key="repository.oauth_remote_server.name">LXOAuthBundle:OAuthRemoteServer</parameter>
+    </parameters>
+
+    <services>
+        <!-- Repositories -->
+        <service id="repository.oauth_remote_server" class="%repository.oauth_remote_server.class%"
+                 factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>%repository.oauth_remote_server.name%</argument>
+        </service>
+    </services>
+</container>

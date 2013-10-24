@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="lx.oauth.api_client.class">LX\OAuthBundle\Client\ApiClient</parameter>
+
+        <parameter key="lx.form.type.oauth_remote_server.class">LX\OAuthBundle\Form\Type\OAuthRemoteServerType</parameter>
+        <parameter key="lx.form.type.oauth_remote_server_filter.class">LX\OAuthBundle\Form\Type\Filter\OAuthRemoteServerFilterType</parameter>
+        <parameter key="lx.form.type.oauth_remote_server_type.class">LX\OAuthBundle\Form\Type\OAuthRemoteServerTypeType</parameter>
+        <parameter key="lx.form.type.oauth_remote_server_status.class">LX\OAuthBundle\Form\Type\OAuthRemoteServerStatusType</parameter>
+    </parameters>
+
+    <services>
+
+        <!-- OAuth Api client -->
+        <service id="lx.oauth.api_client.abstract"
+                 abstract="true">
+            <argument type="service" id="session" />
+            <argument type="service" id="guzzle.client" />
+        </service>
+
+        <service id="lx.oauth.api_client"
+                 class="%lx.oauth.api_client.class%"
+                 parent="lx.oauth.api_client.abstract">
+        </service>
+
+        <!-- Form type -->
+        <service id="lx.form.type.oauth_remote_server"
+                 class="%lx.form.type.oauth_remote_server.class%">
+            <tag name="form.type" alias="oauth_remote_server" />
+        </service>
+
+        <service id="lx.form.type.oauth_remote_server_filter"
+                 class="%lx.form.type.oauth_remote_server_filter.class%">
+            <tag name="form.type" alias="oauth_remote_server_filter" />
+        </service>
+
+        <service id="lx.form.type.oauth_remote_server_type"
+                 class="%lx.form.type.oauth_remote_server_type.class%">
+            <tag name="form.type" alias="oauth_remote_server_type" />
+            <call method="setRepository">
+                <argument type="service" id="repository.oauth_remote_server" />
+            </call>
+        </service>
+
+        <service id="lx.form.type.oauth_remote_server_status"
+                 class="%lx.form.type.oauth_remote_server_status.class%">
+            <tag name="form.type" alias="oauth_remote_server_status" />
+            <call method="setRepository">
+                <argument type="service" id="repository.oauth_remote_server" />
+            </call>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,25 @@
+{
+    "name": "lxark/oauth-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony LXOAuthBundle",
+    "keywords": ["oauth", "api", "client"],
+    "homepage": "https://github.com/lxark/lxOAuthBundle",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Alix Chaysinh",
+            "email": "alix.chaysinh@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.3",
+        "symfony/form": "~2.1",
+        "misd/guzzle-bundle": "*"
+    },
+    "autoload": {
+        "psr-0": { "LX\\OAuthBundle": "" }
+    },
+    "target-dir": "LX/OAuthBundle"
+}
